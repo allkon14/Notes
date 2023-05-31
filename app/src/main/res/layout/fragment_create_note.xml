@@ -190,6 +190,7 @@
 
 
             <Button
+                android:id="@+id/btnCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_30sdp"
                 android:fontFamily="@font/manrope_bold"
@@ -198,9 +199,10 @@
                 android:textSize="@dimen/_12ssp"
                 android:textAllCaps="false"
                 android:textColor="@color/ColorWhite"
-                android:id="@+id/btnCancel"/>
+                />
 
             <Button
+                android:id="@+id/btnOk"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_30sdp"
                 android:fontFamily="@font/manrope_bold"
@@ -210,7 +212,7 @@
                 android:textSize="@dimen/_12ssp"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:textColor="@color/ColorWhite"
-                android:id="@+id/btnOk"/>
+                />
 
 
         </LinearLayout>

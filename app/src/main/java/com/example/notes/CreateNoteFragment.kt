@@ -68,7 +68,10 @@ class CreateNoteFragment : BaseFragment() {
         binding.tvDateTime.text = currentDate
 
         binding.imgBack.setOnClickListener {
-            requireActivity().supportFragmentManager.popBackStack()
+//            requireActivity().supportFragmentManager.popBackStack()
+            val fragment = HomeFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.frame_layout, fragment)?.commit()
         }
         binding.imgDone.setOnClickListener(){
             saveNote()
@@ -89,27 +92,28 @@ class CreateNoteFragment : BaseFragment() {
         }
 
         else {
-
-
-            launch{
-            var notes = Notes()
-            notes.title = binding.etNoteTitle.text.toString()
-            notes.subTitle = binding.etNoteSubTitle.text.toString()
-            notes.noteText = binding.etNoteDesc.text.toString()
-            notes.dateTime = currentDate
-            notes.color = selectedColor
-            notes.imgPath = selectedImagePath
-            notes.webLink = webLink
-            context?.let {
-                NotesDatabase.getDatabase(it).noteDao().insertNotes(notes)
-                binding.etNoteTitle.setText("")
-                binding.etNoteSubTitle.setText("")
-                binding.etNoteDesc.setText("")
-                binding.layoutImage.visibility = View.GONE
-                binding.imgNote.visibility = View.GONE
-                binding.tvWebLink.visibility = View.GONE
-                requireActivity().supportFragmentManager.popBackStack()
-            }
+            launch {
+                var notes = Notes()
+                notes.title = binding.etNoteTitle.text.toString()
+                notes.subTitle = binding.etNoteSubTitle.text.toString()
+                notes.noteText = binding.etNoteDesc.text.toString()
+                notes.dateTime = currentDate
+                notes.color = selectedColor
+                notes.imgPath = selectedImagePath
+                notes.webLink = webLink
+                context?.let {
+                    NotesDatabase.getDatabase(it).noteDao().insertNotes(notes)
+                    binding.etNoteTitle.setText("")
+                    binding.etNoteSubTitle.setText("")
+                    binding.etNoteDesc.setText("")
+                    binding.layoutImage.visibility = View.GONE
+                    binding.imgNote.visibility = View.GONE
+                    binding.tvWebLink.visibility = View.GONE
+//                requireActivity().supportFragmentManager.popBackStack()
+                    val fragment = HomeFragment()
+                    val transaction = fragmentManager?.beginTransaction()
+                    transaction?.replace(R.id.frame_layout, fragment)?.commit()
+                }
             }
         }
 

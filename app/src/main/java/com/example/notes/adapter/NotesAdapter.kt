@@ -1,75 +1,78 @@
 package com.example.notes.adapter
 
 //import kotlinx.android.synthetic.main.item_rv_notes.view.*
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notes.Entity.Notes
-import com.example.notes.R
 import com.example.notes.databinding.ItemRvNotesBinding
-import java.util.*
+import kotlinx.coroutines.flow.Flow
+import kotlin.collections.ArrayList
 
 
-class NotesAdapter() :
+class NotesAdapter(private var ListNotes: ArrayList<Notes>) :
     RecyclerView.Adapter<NotesAdapter.NotesViewHolder>() {
-    private lateinit var binding: ItemRvNotesBinding
+
     var listener:OnItemClickListener? = null
-    var arrList = ArrayList<Notes>()
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_rv_notes, parent, false)
-        return NotesViewHolder(view)
+        val binding = ItemRvNotesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return NotesViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
-        return arrList.size
+        return ListNotes.size
     }
-
-    fun setData(arrNotesList: List<Notes>){
-        arrList = arrNotesList as ArrayList<Notes>
-    }
-
-    fun setOnClickListener(listener1: OnItemClickListener){
-        listener = listener1
-    }
+//
+//    fun setData(arrNotesList: List<Notes>){
+//        ListNotes = arrNotesList as ArrayList<Notes>
+//    }
+//
+//    fun setData(arrNotesList: Flow<List<Notes>>){
+//        ListNotes = arrNotesList as ArrayList<Notes>
+//    }
+//
+//    fun setOnClickListener(listener1: OnItemClickListener){
+//        listener = listener1
+//    }
 
     override fun onBindViewHolder(holder: NotesViewHolder, position: Int) {
+        with(holder.binding) {
+            val note = ListNotes[position]
+            itemtvTitle.text = note.title
+            itemtvDesc.text = note.noteText
+            itemtvDateTime.text = note.dateTime
 
-        holder.tvTitle.text = arrList[position].title
-        holder.tvDesc.text = arrList[position].noteText
-        holder.tvDateTime.text = arrList[position].dateTime
+            if (note.color != null) {
+                itemcardView.setCardBackgroundColor(Color.parseColor(note.color))
+            } else {
+                itemcardView.setCardBackgroundColor(Color.parseColor(com.example.notes.R.color.ColorLightBlack.toString()))
+            }
 
-        if (arrList[position].color != null){
-            holder.cardView.setCardBackgroundColor(Color.parseColor(arrList[position].color))
-        }else{
-            holder.cardView.setCardBackgroundColor(Color.parseColor(com.example.notes.R.color.ColorLightBlack.toString()))
+            if (note.webLink != "") {
+                itemtvWebLink.text = note.webLink
+                itemtvWebLink.visibility = View.VISIBLE
+            } else {
+                itemtvWebLink.visibility = View.GONE
+            }
+
+            itemcardView.setOnClickListener {
+                listener!!.onClicked(note.id!!)
+            }
+
         }
-
-        if (arrList[position].webLink != ""){
-            holder.tvWebLink.text = arrList[position].webLink
-            holder.tvWebLink.visibility = View.VISIBLE
-        }else{
-            holder.tvWebLink.visibility = View.GONE
-        }
-
-        holder.cardView.setOnClickListener {
-            listener!!.onClicked(arrList[position].id!!)
-        }
-
     }
 
-    class NotesViewHolder(view:View) : RecyclerView.ViewHolder(view){
-        val tvTitle : TextView = view.findViewById(R.id.itemtvTitle)
-        val tvDesc : TextView = view.findViewById(R.id.itemtvDesc)
-        val tvDateTime : TextView = view.findViewById(R.id.itemtvDateTime)
-        val cardView : CardView = view.findViewById(R.id.itemcardView)
-        val tvWebLink : TextView = view.findViewById(R.id.itemtvWebLink)
+    class NotesViewHolder(val binding: ItemRvNotesBinding) : RecyclerView.ViewHolder(binding.root){
+//        val tvTitle : TextView = view.findViewById(R.id.itemtvTitle)
+//        val tvDesc : TextView = view.findViewById(R.id.itemtvDesc)
+//        val tvDateTime : TextView = view.findViewById(R.id.itemtvDateTime)
+//        val cardView : CardView = view.findViewById(R.id.itemcardView)
+//        val tvDateTimeWebLink : TextView = view.findViewById(R.id.itemtvWebLink)
 
     }
 

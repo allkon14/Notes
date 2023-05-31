@@ -2,13 +2,25 @@ package com.example.notes
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.add
+import androidx.fragment.app.commit
 import androidx.fragment.app.Fragment
+import com.example.notes.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        replaceFragment(CreateNoteFragment.newInstance(), false)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        if (savedInstanceState == null) {
+            supportFragmentManager.commit {
+                setReorderingAllowed(true)
+                add<WelcomeFragment>(binding.frameLayout.id)
+            }
+        }
+//    //    replaceFragment(WelcomeFragment.newInstance(), false)
 
     }
 

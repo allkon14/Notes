@@ -44,7 +44,7 @@
             <View
                 android:layout_width="@dimen/_24sdp"
                 android:layout_height="@dimen/_24sdp"
-                android:background="@drawable/note_color_1"/>
+                android:background="@drawable/note_color_blue"/>
 
             <ImageView
                 android:id="@+id/imgNote1"
@@ -63,7 +63,7 @@
             <View
                 android:layout_width="@dimen/_24sdp"
                 android:layout_height="@dimen/_24sdp"
-                android:background="@drawable/note_color_2"/>
+                android:background="@drawable/note_color_yellow"/>
 
             <ImageView
                 android:id="@+id/imgNote2"
@@ -83,7 +83,7 @@
             <View
                 android:layout_width="@dimen/_24sdp"
                 android:layout_height="@dimen/_24sdp"
-                android:background="@drawable/note_color_4"/>
+                android:background="@drawable/note_color_pink"/>
 
             <ImageView
                 android:id="@+id/imgNote4"
@@ -102,7 +102,7 @@
             <View
                 android:layout_width="@dimen/_24sdp"
                 android:layout_height="@dimen/_24sdp"
-                android:background="@drawable/note_color_5"/>
+                android:background="@drawable/note_color_green"/>
 
             <ImageView
                 android:id="@+id/imgNote5"
@@ -121,7 +121,7 @@
             <View
                 android:layout_width="@dimen/_24sdp"
                 android:layout_height="@dimen/_24sdp"
-                android:background="@drawable/note_color_6"/>
+                android:background="@drawable/note_color_red"/>
 
             <ImageView
                 android:id="@+id/imgNote6"
@@ -139,7 +139,7 @@
             <View
                 android:layout_width="@dimen/_24sdp"
                 android:layout_height="@dimen/_24sdp"
-                android:background="@drawable/note_color_7"/>
+                android:background="@drawable/note_color_black"/>
 
             <ImageView
                 android:id="@+id/imgNote7"
